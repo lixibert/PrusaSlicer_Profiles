@@ -1,0 +1,11 @@
+# Dieses Repo liegt direkt in %APPDATA%\PrusaSlicer.
+# Alles ignorieren, nur die eigenen Profile versionieren.
+/*
+!/.gitignore
+!/.gitattributes
+!/README.md
+!/print/
+!/filament/
+!/printer/
+!/physical_printer/
+!/tools/
