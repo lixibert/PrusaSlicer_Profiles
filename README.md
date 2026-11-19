@@ -12,6 +12,30 @@ andere (Cache, Vendor-Profile, Snapshots, `PrusaSlicer.ini` mit Fensterstatus) b
 - Profile nur bearbeiten, wenn PrusaSlicer **geschlossen** ist (sonst überschreibt er die Datei).
 - Nicht auf zwei Rechnern gleichzeitig dasselbe Profil ändern.
 
+## Profilstruktur (seit 19.11.2026)
+
+Namensschema (kein `|` möglich, Windows erlaubt das Zeichen nicht in Dateinamen):
+
+- **Drucker:** `V24 350 Revo 0.4`, `V24 350 Revo 0.6`, `MK2.5S (Reserve)`
+- **Druck:** `V24 <Düse> - <Schichthöhe> <Zweck>`
+  - 0.4: `0.10 Extrafein`, `0.12 Optik`, `0.16 Fein`, `0.20 Standard`, `0.20 Stabil`, `0.28 Schnell`
+  - 0.6: `0.30 Standard`, `0.25 TPU`
+- **Filament:** `<Material> - <Hersteller/Produkt>`, z. B. `PLA - Sunlu PLA+ 2.0`
+- MK2.5S-Profile beginnen mit `MK2.5S - ` und erscheinen nur beim MK2.5S.
+
+Regeln:
+
+- **Druckprofile sind materialneutral.** Temperatur, Lüfter, Rückzug, Pressure Advance und die
+  maximale Volumengeschwindigkeit (MVS) stehen im **Filamentprofil**. `max_volumetric_speed`
+  im Druckprofil ist 0, die Grenze kommt vom Filament (Revo bei 220 °C: max. ca. 16 mm³/s, Profile ≤ 13).
+- Jedes Filament braucht ein MVS > 0.
+- Sichtbarkeit über `printer_notes`: Die Voron-Druckerprofile enthalten `VORON24`, Druck- und
+  Filamentprofile filtern darauf (Druck zusätzlich auf den Düsendurchmesser).
+- Alle Druck-Varianten sind von `V24 0.4 - 0.20 Standard` abgeleitet. PrusaSlicer kann eigene
+  Profile nicht voneinander erben lassen. Eine Änderung an der Basis muss deshalb in die Varianten
+  übernommen werden (macht Claude per Skript).
+- Beschleunigungen ≤ 4800 (Klipper `max_accel`).
+
 ## Neuen Rechner einrichten
 
 Voraussetzung: [Git for Windows](https://git-scm.com/download/win), PrusaSlicer einmal gestartet.
