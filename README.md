@@ -18,7 +18,7 @@ Namensschema (kein `|` möglich, Windows erlaubt das Zeichen nicht in Dateinamen
 
 - **Drucker:** `V24 350 Revo 0.4`, `V24 350 Revo 0.6`, `MK2.5S (Reserve)`
 - **Druck:** `V24 <Düse> - <Schichthöhe> <Zweck>`
-  - 0.4: `0.10 Extrafein`, `0.12 Optik`, `0.16 Fein`, `0.20 Standard`, `0.20 Stabil`, `0.28 Schnell`
+  - 0.4: `0.10 Extrafein`, `0.12 Optik`, `0.16 Fein`, `0.20 Standard`, `0.20 Stabil`, `0.20 Voron-Teile`, `0.28 Schnell`
   - 0.6: `0.30 Standard`, `0.25 TPU`
 - **Filament:** `<Material> - <Hersteller/Produkt>`, z. B. `PLA - Sunlu PLA+ 2.0`
 - MK2.5S-Profile beginnen mit `MK2.5S - ` und erscheinen nur beim MK2.5S.
