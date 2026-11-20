@@ -20,6 +20,7 @@ Namensschema (kein `|` möglich, Windows erlaubt das Zeichen nicht in Dateinamen
 - **Druck:** `V24 <Düse> - <Schichthöhe> <Zweck>`
   - 0.4: `0.10 Extrafein`, `0.12 Optik`, `0.16 Fein`, `0.20 Standard`, `0.20 Stabil`, `0.20 Voron-Teile`, `0.28 Schnell`
   - 0.6: `0.30 Standard`, `0.25 TPU`
+  - Kalibrierung: `V24 0.4 - PA-Test` (siehe unten)
 - **Filament:** `<Material> - <Hersteller/Produkt>`, z. B. `PLA - Sunlu PLA+ 2.0`
 - MK2.5S-Profile beginnen mit `MK2.5S - ` und erscheinen nur beim MK2.5S.
 
@@ -56,3 +57,14 @@ Vorher ggf. eine Sicherung des Ordners anlegen.
 - Zeilenenden bleiben CRLF (`.gitattributes`), so wie PrusaSlicer sie schreibt.
 - `print_host` / `printhost_apikey` sind leer. **Keine API-Keys in die Profile eintragen**
   (Upload-Ziele gehören in `physical_printer/` – vor dem Commit prüfen).
+
+## Pressure Advance kalibrieren
+
+1. Modell `tools/kalibrierung/PA-Turm_square_tower.stl` laden, Druckprofil **`V24 0.4 - PA-Test`**, gewünschtes Filament wählen.
+2. Slicen und drucken. Der Dateiname beginnt mit `PA-Test_` – daran erkennt `PRINT_START` den Test und startet
+   `TUNING_TOWER`: ADVANCE = 0 + Höhe (mm) × 0,002, Beschleunigung 500, Eckgeschwindigkeit 1.
+   (Andere Spanne: vorher in Mainsail `PA_TEST START=0 FACTOR=0.002` mit eigenen Werten.)
+3. Auswerten: Höhe (mm) messen, bei der die Ecken am saubersten sind (keine Wülste, keine Lücken) → PA = Höhe × 0,002.
+4. Wert ins Filamentprofil, Filament-Start-G-Code: `SET_PRESSURE_ADVANCE ADVANCE=<Wert>`.
+
+Der nächste normale Druck setzt Beschleunigung und Pressure Advance in `PRINT_START` automatisch zurück.
