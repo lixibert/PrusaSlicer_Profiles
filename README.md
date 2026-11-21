@@ -60,6 +60,14 @@ Vorher ggf. eine Sicherung des Ordners anlegen.
 
 ## Pressure Advance kalibrieren
 
+**Bevorzugt: Ellis-Muster** (https://ellis3dp.com/Pressure_Linear_Advance_Tool/) – schneller, Werte aufgedruckt, misst bei echter Beschleunigung.
+Einstellungen: Firmware Klipper, Bett 350 x 350, Start-G-Code `PRINT_START EXTRUDER=[HOTEND_TEMP] BED=[BED_TEMP]`,
+Haken bei "Don't Add G28" und "Don't Add Heating G-Codes", End-G-Code `PRINT_END`, Hotend-Temp = Drucktemperatur des Filaments,
+Beschleunigung 1000 (Aussenwand), Rueckzug 0,75 mm / 35 mm/s (PETG 1 mm), PA 0,02-0,10 Schritt 0,005.
+Dateiname nicht "PA-Test..." nennen (sonst startet zusaetzlich der Turm-Modus).
+
+**Alternativ: Klipper-Turm**
+
 1. Modell `tools/kalibrierung/PA-Turm_square_tower.stl` laden, Druckprofil **`V24 0.4 - PA-Test`**, gewünschtes Filament wählen.
 2. Slicen und drucken. Der Dateiname beginnt mit `PA-Test_` – daran erkennt `PRINT_START` den Test und startet
    `TUNING_TOWER`: ADVANCE = 0 + Höhe (mm) × 0,002, Beschleunigung 500, Eckgeschwindigkeit 1.
